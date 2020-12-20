@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <form action=" {% url 'add' %}" method="post">
+        {% csrf_token %}
+        <h5>Enter the title</h5>
+        <input name="title" type="text" placeholder="title">
+        <h5>Enter the description</h5>
+        <textarea name="description" rows="1" cols="40">
+        </textarea>
+        <h5>Enter the initial bid</h5>
+        <input name="bid" type="text" placeholder="initial-bid">
+        <h5>Enter the link of the image</h5>
+        <input name="img" type="text" placeholder="link of the img">
+        <h5>Enter the category</h5>
+        <select name="category">
+            {% for c in categories %}
+                <option value="{{c}}"> {{c}} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+
+
+
+{% endblock %}

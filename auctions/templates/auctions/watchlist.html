@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if count <= 0 %}
+    <h2>You have {{count}} item in your WatchList: </h2>
+    {% else %}
+    <h2>You have {{count}} items in your WatchList: </h2>
+    {% endif %}
+    {% for l in list %}
+        <a class="nav-link" href="{{l.listings.title}}">
+        <div class="listing">
+            <div class="img">
+                <img src="{{l.listings.link}}"
+            </div>
+            <div class="description">
+                <h4>{{l.listings.title}}</h4>
+                <h5>{{l.listings.starting_bid}} DH</h5>
+                <p>{{l.listings.date}}</p>
+            </div>
+        </div>
+        </a>
+    {% endfor %}
+{% endblock %}

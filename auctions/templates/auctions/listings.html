@@ -1,0 +1,65 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing: {{listing.title}}</h2>
+    {% if msg %}
+        <h1>!!!{{msg}}!!!</h1>
+    {% endif %}
+
+
+    
+    {% if user.is_authenticated and not close and user.username != username.username%}
+        <form action=" {% url 'cool' listing.title %}" method="post">
+        {% csrf_token %}
+        <input type="submit" name="add" value="watchlist">
+        <br>
+    {% endif %}
+    <img src="{{ listing.link}}" />
+    <p>{{listing.description}}</p>
+    <h2>{{listing.starting_bid}} DH</h2>
+    {% if user.is_authenticated  and not close and user.username != username.username%}
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+    <div class="bid">
+        <form action=" {% url 'cool' listing.title %}" method="post">
+        {% csrf_token %}
+        <p>{{bid}} bid(s) so far. Your bid is the current bid<p>
+        <input name="newBid" type="text" placeholder="Bid">
+        <input type="submit" value="Place Bid">
+    </form>
+    </div>
+    {% endif %}
+    {% if user.is_authenticated and user.username == username.username and not close%}
+        <form action=" {% url 'cool' listing.title %}" method="post">
+        {% csrf_token %}
+        <input type="submit" name="delete" value="close">
+        <br>
+    {% endif %}
+
+    <h3>Details</h3>
+    <ul>
+        <li>Listed by: <span style="color:blue">{{username.username}}</span></li>
+        <li>Category: <a href="{% url 'category' category %}"><span style="color:blue">{{category}}</a></span></li>
+    </ul>
+
+    {% if user.is_authenticated and not close and user.username != username.username%}
+        <form action=" {% url 'cool' listing.title %}" method="post">
+        {% csrf_token %}
+        <textarea class="form-control" name="comment"rows="3" placeholder="Tape your comment here"></textarea>
+        <br>
+        <input type="submit" value="enter">
+        <br>
+    {% endif %}
+
+    {% if comments %}
+        <ul>
+            {% for c in comments %}
+                <li>{{c.id_user.username}}: {{c.name}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+
+{% endblock %}

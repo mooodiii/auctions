@@ -1,0 +1,10 @@
+body {
+    padding: 10px;
+}
+
+.listing {
+    width: 100%;
+    height: 500px;
+    border: 2px solid black;
+    display: flexbox;
+}

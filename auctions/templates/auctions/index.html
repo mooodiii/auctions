@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for listing in listings %}
+    {% if listing.is_active %}
+        <a class="nav-link" href="{{listing.title}}">
+        <div class="listing">
+            <div class="img">
+                <img src="{{listing.link}}"
+            </div>
+            <div class="description">
+                <h4>{{listing.title}}</h4>
+                <h5>{{listing.starting_bid}} DH</h5>
+                <p>{{listing.date}}</p>
+            </div>
+        </div>
+        </a>
+    {% endif %}
+    {% endfor %}
+{% endblock %}
